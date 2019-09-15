@@ -1,2 +1,17 @@
 rootProject.name = "gradle-multiple-project"
-include("project-dao")
+include("entities")
+include("usescase")
+include("in-memory-hazelcast")
+include("in-memory-simple")
+include("spring-jpa")
+include("spring-rest-template")
+include("config")
+include("manual-app")
+include("spring-app")
+
+project(":in-memory-hazelcast").projectDir = File("adapters/in-memory-hazelcast")
+project(":in-memory-simple").projectDir = File("adapters/in-memory-simple")
+project(":spring-jpa").projectDir = File("adapters/spring-jpa")
+project(":spring-rest-template").projectDir = File("adapters/spring-rest-template")
+project(":manual-app").projectDir = File("application/manual-app")
+project(":spring-app").projectDir = File("application/spring-app")

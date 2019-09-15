@@ -1,0 +1,13 @@
+package com.allali84.ws.model
+
+import java.util.*
+import javax.validation.constraints.NotNull
+
+data class FaqWS(
+        @NotNull
+        val question: String,
+        @NotNull
+        val answer: String,
+        @NotNull
+        val dateQuestion: Date
+)
