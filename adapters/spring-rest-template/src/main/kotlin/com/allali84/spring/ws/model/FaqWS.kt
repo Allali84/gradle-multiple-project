@@ -1,4 +1,4 @@
-package com.allali84.ws.model
+package com.allali84.spring.ws.model
 
 import java.util.*
 import javax.validation.constraints.NotNull

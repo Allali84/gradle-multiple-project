@@ -1,4 +1,4 @@
-package com.allali84.jpa.model
+package com.allali84.spring.jpa.model
 
 
 import java.util.*

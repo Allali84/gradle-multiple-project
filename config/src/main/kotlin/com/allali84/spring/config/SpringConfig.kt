@@ -1,10 +1,10 @@
-package com.allali84.config
+package com.allali84.spring.config
 
-import com.allali84.jpa.FaqRepositoryJpaImpl
+import com.allali84.spring.jpa.FaqRepositoryJpaImpl
 import com.allali84.usescase.CreateFaq
 import com.allali84.usescase.DeleteFaq
 import com.allali84.usescase.FindFaq
-import com.allali84.ws.FaqRepositoryWSImpl
+import com.allali84.spring.ws.FaqRepositoryWSImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 

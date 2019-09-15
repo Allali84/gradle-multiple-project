@@ -1,8 +1,8 @@
 package com.allali84.spring.controller
 
 
-import com.allali84.config.SpringConfig
 import com.allali84.entities.Faq
+import com.allali84.spring.config.SpringConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.PostMapping

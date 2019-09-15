@@ -1,10 +1,10 @@
-package com.allali84.ws
+package com.allali84.spring.ws
 
 import com.allali84.entities.Faq
 import com.allali84.usescase.exception.QuestionNotFoundException
 import com.allali84.usescase.port.FaqRepository
-import com.allali84.ws.model.FaqWS
-import com.allali84.ws.model.ListFaqWS
+import com.allali84.spring.ws.model.FaqWS
+import com.allali84.spring.ws.model.ListFaqWS
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
@@ -12,8 +12,7 @@ import org.springframework.web.client.RestTemplate
 @Component
 class FaqRepositoryWSImpl: FaqRepository {
 
-    @Autowired
-    private lateinit var template: RestTemplate
+    private var template = RestTemplate()
 
     override fun findFaqByQuestion(question: String): Faq? {
         val faqWs = template.getForEntity("URL?question=$question", FaqWS::class.java)
@@ -29,13 +28,13 @@ class FaqRepositoryWSImpl: FaqRepository {
     }
 
     override fun create(faq: Faq): Faq {
-        template.postForEntity("URL",FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
+        template.postForEntity("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
         // TODO Manage the errors
         return faq
     }
 
     override fun delete(faq: Faq): Faq {
-        template.delete("URL",FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
+        template.delete("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
         // TODO Manage the errors
         return faq
     }

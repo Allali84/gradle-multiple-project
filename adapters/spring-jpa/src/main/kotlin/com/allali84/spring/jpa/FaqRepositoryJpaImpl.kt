@@ -1,7 +1,7 @@
-package com.allali84.jpa
+package com.allali84.spring.jpa
 
 import com.allali84.entities.Faq
-import com.allali84.jpa.model.FaqJpa
+import com.allali84.spring.jpa.model.FaqJpa
 import com.allali84.usescase.exception.QuestionNotFoundException
 import com.allali84.usescase.port.FaqRepository
 import org.springframework.stereotype.Component
