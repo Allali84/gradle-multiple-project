@@ -37,7 +37,7 @@ subprojects {
 
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "kotlin")
-	if (name == "spring-jpa" || name == "spring-rest-template" || name == "config" || name == "spring-app") {
+	if (name == "spring-jpa" || name == "spring-rest-template" || name == "config" || name == "spring-app" || name == "manual-app") {
 		apply(plugin = "org.springframework.boot")
 		apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 	}
