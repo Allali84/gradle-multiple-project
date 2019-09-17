@@ -5,36 +5,40 @@ import com.allali84.usescase.exception.QuestionNotFoundException
 import com.allali84.usescase.port.FaqRepository
 import com.allali84.spring.ws.model.FaqWS
 import com.allali84.spring.ws.model.ListFaqWS
+import org.mockserver.serialization.model.DTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
+import javax.annotation.PostConstruct
 
 @Component
 class FaqRepositoryWSImpl: FaqRepository {
 
-    private var template = RestTemplate()
+    @PostConstruct
+    fun startAndInitMockServer() {
+        mockServer.init()
+    }
 
     override fun findFaqByQuestion(question: String): Faq? {
-        val faqWs = template.getForEntity("URL?question=$question", FaqWS::class.java)
+        val faqWs = e2eRestTemplate.getForEntity("http://localhost:1080/faqs-source/faq?questionFromWs=$question", FaqWS::class.java)
         val body = faqWs.body ?: throw QuestionNotFoundException("Question Not Found")
-        return Faq(body.question, body.answer, body.dateQuestion)
+        return Faq(body.questionFromWs, body.answerFromWs, body.dateQuestionFromWs)
     }
 
     override fun findAll(): List<Faq> {
-        val faqWs = template.getForEntity("URL", ListFaqWS::class.java)
+        val faqWs = e2eRestTemplate.getForEntity("http://localhost:1080/faqs-source/faqs", Array<FaqWS>::class.java)
         val body = faqWs.body ?: throw QuestionNotFoundException("Question Not Found")
-        if (body.faqWSs.isNullOrEmpty()) throw QuestionNotFoundException("Question Not Found")
-        return body.faqWSs.map { Faq(it.question, it.answer, it.dateQuestion) }
+        return body.map { Faq(it.questionFromWs, it.answerFromWs, it.dateQuestionFromWs) }
     }
 
     override fun create(faq: Faq): Faq {
-        template.postForEntity("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
+        e2eRestTemplate.postForEntity("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
         // TODO Manage the errors
         return faq
     }
 
     override fun delete(faq: Faq): Faq {
-        template.delete("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
+        e2eRestTemplate.delete("URL", FaqWS(faq.question, faq.answer, faq.dateQuestion), FaqWS::class.java)
         // TODO Manage the errors
         return faq
     }

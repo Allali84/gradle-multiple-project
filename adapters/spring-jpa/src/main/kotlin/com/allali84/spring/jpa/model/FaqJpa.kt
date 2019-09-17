@@ -2,6 +2,7 @@ package com.allali84.spring.jpa.model
 
 
 import java.util.*
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.validation.constraints.NotNull
@@ -15,4 +16,5 @@ data class FaqJpa(
         @NotNull
         val answer: String,
         @NotNull
+        @Column(name="date_question")
         val dateQuestion: Date)

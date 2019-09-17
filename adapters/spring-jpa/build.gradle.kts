@@ -8,12 +8,3 @@ dependencies {
 	implementation("javax.validation:validation-api")
 	implementation("com.h2database:h2")
 }
-
-
-tasks.bootJar {
-	enabled = false
-}
-
-tasks.jar {
-	enabled = true
-}

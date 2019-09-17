@@ -1,13 +1,15 @@
 package com.allali84.spring.ws.model
 
+import java.io.Serializable
 import java.util.*
 import javax.validation.constraints.NotNull
 
 data class FaqWS(
         @NotNull
-        val question: String,
+        var questionFromWs: String = "",
         @NotNull
-        val answer: String,
+        var answerFromWs: String = "",
         @NotNull
-        val dateQuestion: Date
-)
+        var dateQuestionFromWs: Date = Date(),
+        var infoFromWs: String = ""
+): Serializable
