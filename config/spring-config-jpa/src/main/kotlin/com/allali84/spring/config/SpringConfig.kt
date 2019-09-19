@@ -4,24 +4,20 @@ import com.allali84.spring.jpa.FaqRepositoryJpaImpl
 import com.allali84.usescase.CreateFaq
 import com.allali84.usescase.DeleteFaq
 import com.allali84.usescase.FindFaq
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SpringConfig {
+class SpringConfig(private val faqRepositoryJpaImpl: FaqRepositoryJpaImpl) {
 
-    @Autowired
-    private lateinit var faqRepositoryJpaImpl: FaqRepositoryJpaImpl
-
-    fun createFaqJpa() : CreateFaq {
+    fun createFaq() : CreateFaq {
         return CreateFaq(faqRepositoryJpaImpl)
     }
 
-    fun deleteFaqJpa() : DeleteFaq {
+    fun deleteFaq() : DeleteFaq {
         return DeleteFaq(faqRepositoryJpaImpl)
     }
 
-    fun findFaqJpa() : FindFaq {
+    fun findFaq() : FindFaq {
         return FindFaq(faqRepositoryJpaImpl)
     }
 

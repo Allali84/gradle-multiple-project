@@ -9,14 +9,9 @@ class CreateFaq constructor(
         private val faqRepository: FaqRepository
 ) {
     fun create(faq: Faq): Faq {
-        try {
-            if (faqRepository.findFaqByQuestion(faq.question) != null) {
-                throw QuestionAlreadyExistsException(faq.question)
-            }
-        } catch (e: QuestionNotFoundException) {
-            //TODO log this exception
+        if (faqRepository.findFaqByQuestion(faq.question) != null) {
+            throw QuestionAlreadyExistsException("This question : ${faq.question} already exist")
         }
-
         return faqRepository.create(faq)
     }
 }

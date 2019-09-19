@@ -4,24 +4,20 @@ import com.allali84.usescase.CreateFaq
 import com.allali84.usescase.DeleteFaq
 import com.allali84.usescase.FindFaq
 import com.allali84.spring.ws.FaqRepositoryWSImpl
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SpringConfig {
+class SpringConfig(private val faqRepositoryWSImpl: FaqRepositoryWSImpl)  {
 
-    @Autowired
-    private lateinit var faqRepositoryWSImpl: FaqRepositoryWSImpl
-
-    fun createFaqWs() : CreateFaq {
+    fun createFaq() : CreateFaq {
         return CreateFaq(faqRepositoryWSImpl)
     }
 
-    fun deleteFaqWs() : DeleteFaq {
+    fun deleteFaq() : DeleteFaq {
         return DeleteFaq(faqRepositoryWSImpl)
     }
 
-    fun findFaqWs() : FindFaq {
+    fun findFaq() : FindFaq {
         return FindFaq(faqRepositoryWSImpl)
     }
 }

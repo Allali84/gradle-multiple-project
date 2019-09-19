@@ -1,0 +1,25 @@
+scalar Date
+
+type Faq {
+    question: String!
+    answer: String!
+    dateQuestion: Date!
+}
+
+input FaqInput {
+    question: String!
+    answer: String!
+    dateQuestion: Date!
+}
+
+# The Root Query for the application
+type Query {
+    findAllFaqs: [Faq]
+    findFaqByQuestion(question: String!): Faq
+}
+
+# The Root Mutation for the application
+type Mutation {
+    createFaq(faq: FaqInput!): Faq!
+    deleteFaq(faq: FaqInput!): Faq!
+}

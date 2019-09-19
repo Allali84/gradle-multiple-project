@@ -1,7 +1,6 @@
 package com.allali84.db
 
 import com.allali84.entities.Faq
-import com.allali84.usescase.exception.QuestionNotFoundException
 import com.allali84.usescase.port.FaqRepository
 import java.util.HashMap
 
@@ -10,7 +9,7 @@ class FaqRepositoryInMemorySimpleImpl: FaqRepository {
     private val inMemoryDb = HashMap<String, Faq>()
 
     override fun findFaqByQuestion(question: String): Faq? {
-        return inMemoryDb[question] ?: throw QuestionNotFoundException("Question Not Found")
+        return inMemoryDb[question]
     }
 
     override fun findAll(): List<Faq> = inMemoryDb.values.toList()

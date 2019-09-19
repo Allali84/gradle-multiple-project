@@ -2,7 +2,6 @@ package com.allali84.spring.jpa
 
 import com.allali84.entities.Faq
 import com.allali84.spring.jpa.model.FaqJpa
-import com.allali84.usescase.exception.QuestionNotFoundException
 import com.allali84.usescase.port.FaqRepository
 import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,11 +15,8 @@ class FaqRepositoryJpaImpl: FaqRepository {
 
     override fun findFaqByQuestion(question: String): Faq? {
         val faqJpa = repository.findFaqByQuestion(question)
-        return if (faqJpa == null) {
-            throw QuestionNotFoundException("Question Not Found")
-        } else {
-            Faq(faqJpa.question, faqJpa.answer, faqJpa.dateQuestion)
-        }
+        faqJpa ?: return null
+        return Faq(faqJpa.question, faqJpa.answer, faqJpa.dateQuestion)
     }
 
     override fun findAll(): List<Faq> {
@@ -34,9 +30,7 @@ class FaqRepositoryJpaImpl: FaqRepository {
 
     override fun delete(faq: Faq): Faq {
         val faqJpa = repository.findFaqByQuestion(faq.question)
-        if (faqJpa == null) {
-            throw QuestionNotFoundException("Question to be deleted Not Found")
-        } else {
+        if (faqJpa != null) {
             repository.delete(faqJpa)
         }
         return faq
